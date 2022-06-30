@@ -1,5 +1,5 @@
 *~
-/dist/rootfs/
-/dist/rootfs.tar.gz
-/dist/tempmon-os.tar
+/dst/rootfs/
+/dst/rootfs.tar.gz
+/dst/tempmon-os.tar
 /srv/result
