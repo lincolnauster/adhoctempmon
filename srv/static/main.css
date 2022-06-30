@@ -1,0 +1,122 @@
+body { font-family: "sans-serif"; }
+div#main {
+    width: 100%;
+}
+
+div#main > div#text {
+    text-align: left;
+    max-width: 40%;
+    min-width: 35em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#curr {
+    font-size: 2em;
+}
+
+.aux {
+    display: flex;
+    width: 100%;
+
+    justify-content: right;
+    padding: 4px 32px 4px 32px;
+}
+
+.aux > .data, .label {
+    margin-left: 32px;
+    width: 30%;
+    text-align: right;
+}
+
+.aux > .data {
+    width: 40%;
+}
+
+.md {
+    display: flex;
+    width: 100%;
+
+    justify-content: space-between;
+
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.block {
+    width: 100%;
+    background-color: #eee;
+    padding: 32px 32px 32px 32px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    
+    border-radius: 32px;
+    transition: 0.4s;
+}
+
+.block:hover {
+    border-radius: 8px;
+    transition: 0.4s;
+}
+
+.md > .label {
+    font-weight: 525;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.md > .label > .weak {
+    font-weight: 500;
+}
+
+.md > .data {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+details { text-align: center; }
+
+details > summary {
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+    padding: 8px 0px 8px 0px;
+}
+
+details > summary:hover {
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+ul > li {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+ul { padding: 0px; width: 100%; }
+
+input[type="submit"] {
+    border: none;
+    border-radius: 8px;
+    background-color: #ecedc0;
+    transition: 0.3s;
+    border: 1px solid black;
+}
+
+input[type="submit"]:hover {
+    border-radius: 0px;
+    transition: 0.3s;
+}
+
+input {
+    font-size: 1.1em;
+    padding: 8px 16px 8px 16px;
+}
+
+input[type="email"], input[type="tel"], input[type="number"], input[type="text"] {
+    border-bottom: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
