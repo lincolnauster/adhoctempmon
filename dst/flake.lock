@@ -1,0 +1,56 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1656065134,
+        "narHash": "sha256-oc6E6ByIw3oJaIyc67maaFcnjYOz1mMcOtHxbEf9NwQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "bee6a7250dd1b01844a2de7e02e4df7d8a0a206c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1656401090,
+        "narHash": "sha256-bUS2nfQsvTQW2z8SK7oEFSElbmoBahOPtbXPm0AL3I4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "16de63fcc54e88b9a106a603038dd5dd2feb21eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs",
+        "rootfs": "rootfs"
+      }
+    },
+    "rootfs": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-HUkxEga/R5nNE2Tz/NleFSfbDoUC4twM9By3lnrwSe4=",
+        "type": "file",
+        "url": "https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/armhf/alpine-rpi-3.16.0-armhf.tar.gz"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/armhf/alpine-rpi-3.16.0-armhf.tar.gz"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
