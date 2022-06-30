@@ -86,7 +86,7 @@ cp fbsplash0.ppm $IRFS_DIR/media/splash/
 
 # We need to override the init script to copy over everything in
 # /ensure.
-cp ./init $IRFS_DIR/init
+cp ./init.sh $IRFS_DIR/init
 
 mkdir -p $IRFS_DIR/ensure/etc/
 echo 'haha balls' > $IRFS_DIR/ensure/etc/pog
