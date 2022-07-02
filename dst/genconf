@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+echo -e "\033[33mThis script generates a configuration script for the final"
+echo -e "image. It must be run before build.sh or nix build.\033[0m"
+echo    "───────────────────────────────────────────────────────────"
+
+read -p "WiFi SSID: " WIFI_SSID
+read -p "WiFi PSK:  " WIFI_PSK
+
+cat <<EOF > conf
+WIFI_SSID="$WIFI_SSID"
+WIFI_PSK="$WIFI_PSK"
+EOF
