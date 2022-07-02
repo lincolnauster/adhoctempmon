@@ -10,11 +10,18 @@
           crossSystem.config = "aarch64-linux";
         }).pkgsStatic;
 
+        nativePkgs = import nixpkgs {
+          inherit system;
+        };
+
         defaultPackage = pkgs.haskellPackages.callPackage ./default.nix {};
+
+        nativeDefaultPackage =
+          nativePkgs.haskellPackages.callPackage ./default.nix {};
       in {
         inherit defaultPackage;
-        devShell = pkgs.haskellPackages.shellFor {
-          packages = p: [ defaultPackage ];
+        devShell = nativePkgs.haskellPackages.shellFor {
+          packages = p: [ nativeDefaultPackage ];
           buildInputs = with pkgs; [ cabal-install ];
         };
       });
