@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -36,6 +36,10 @@ ensure_empty() {
 	exit 1
     fi
 }
+
+stage "LOADING CONFIG"
+
+. ./conf
 
 stage "CHECKING ENVIRONMENT"
 
@@ -84,12 +88,39 @@ cp -r rootfs patched-rootfs
 mkdir -p $IRFS_DIR/media/splash/
 cp fbsplash0.ppm $IRFS_DIR/media/splash/
 
+warn "set splash screen"
+
 # We need to override the init script to copy over everything in
 # /ensure.
 cp ./init.sh $IRFS_DIR/init
 
+warn "set init script"
+
 mkdir -p $IRFS_DIR/ensure/etc/
-echo 'haha balls' > $IRFS_DIR/ensure/etc/pog
+cat <<EOF > $IRFS_DIR/ensure/etc/wpa_supplicant.conf
+network={
+	ssid="$WIFI_SSID"
+	psk="$WIFI_PSK"
+}
+EOF
+
+mkdir -p $IRFS_DIR/ensure/etc/network/
+cat <<EOF > $IRFS_DIR/ensure/etc/network/interfaces
+auto lo
+auto wlan0
+iface wlan0 inet dhcp
+EOF
+
+mkdir -p $IRFS_DIR/ensure/etc/conf.d
+cat <<EOF > $IRFS_DIR/ensure/etc/conf.d/wpa_supplicant
+wpa_supplicant_if="wlan0"
+wpa_supplicant_conf="/etc/wpa_supplicant.conf"
+
+# wpa_supplicant will use dbus by default ... on alpine. somehow.
+wpa_supplicant_dbus="no"
+EOF
+
+warn "configured wifi"
 
 stage "ARCHIVING SYSTEM"
 

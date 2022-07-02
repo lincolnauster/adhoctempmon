@@ -633,6 +633,9 @@ if [ -n "$KOPT_pkgs" ]; then
 	pkgs=$(echo "$KOPT_pkgs" | tr ',' ' ' )
 fi
 
+# Let's just make sure our networking crap is actually there...
+pkgs="$pkgs wpa_supplicant dhcpcd"
+
 # load apkovl or set up a minimal system
 if [ -f "$ovl" ]; then
 	ebegin "Loading user settings from $ovl"
@@ -665,6 +668,8 @@ if [ -f "$sysroot/etc/.default_boot_services" -o ! -f "$ovl" ]; then
 	rc_add savecache shutdown
 
 	rc_add firstboot default
+	rc_add wpa_supplicant default
+	rc_add dhcpcd default
 
 	# add openssh
 	if [ -n "$KOPT_ssh_key" ]; then
@@ -827,7 +832,7 @@ setup_inittab_console
 ! [ -f "$sysroot"/etc/resolv.conf ] && [ -f /etc/resolv.conf ] && \
 	cp /etc/resolv.conf "$sysroot"/etc
 
-[ -d /ensure ] && cp -rf /ensure/* $sysroot
+[ -d /ensure ] && cp -rvf /ensure/* $sysroot
 
 # setup bootchart for switch_root
 chart_init=""
@@ -854,6 +859,7 @@ sync
 
 [ "$KOPT_splash" = "init" ] && echo exit > $sysroot/$splashfile
 echo ""
+
 exec /bin/busybox switch_root $switch_root_opts $sysroot $chart_init "$KOPT_init" $KOPT_init_args
 
 [ "$KOPT_splash" != "no" ] && echo exit > $sysroot/$splashfile
