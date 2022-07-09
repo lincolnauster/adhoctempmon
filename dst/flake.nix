@@ -15,21 +15,31 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-      in {
-        defaultPackage = pkgs.stdenv.mkDerivation {
-          name = "adhoctempmon_dst";
-          version = "0.0.1";
-          
+
+        sedEsc = builtins.replaceStrings ["/"] ["\\/"];
+        bash = "${pkgs.bash}/bin/bash";
+
+        deriv = { ssid, psk }: pkgs.stdenv.mkDerivation {
           src = ./.;
 
-          # This isn't a patch, but, unlike some other phases, it
-          # actually modifies the source tree.
+          name = "adhoctempmon_dst";
+          version = "0.0.1";
+
           postPatch = ''
+            sed -i 's/${sedEsc "/usr/bin/env bash"}/${sedEsc bash}/' build.sh
+            sed -i 's/${sedEsc "/usr/bin/env bash"}/${sedEsc bash}/' genconf
+
             mkdir rootfs
             tar -C rootfs -xf ${rootfs}
+
+            [ -f ./conf ] || cat <<EOF | ./genconf
+              ${ssid}
+              ${psk}
+            EOF
           '';
 
           buildPhase = ''
+            ls
             ./build.sh
           '';
 
@@ -42,6 +52,13 @@
           dontConfigure = true;
 
           buildInputs = with pkgs; [ cpio curl ];
+        };
+      in {
+        lib.dist = deriv;
+
+        defaultPackage = deriv {
+          ssid = "";
+          psk = "";
         };
       }
     );
