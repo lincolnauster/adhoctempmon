@@ -8,6 +8,6 @@ read -p "WiFi SSID: " WIFI_SSID
 read -p "WiFi PSK:  " WIFI_PSK
 
 cat <<EOF > conf
-WIFI_SSID="$WIFI_SSID"
-WIFI_PSK="$WIFI_PSK"
+WIFI_SSID='$WIFI_SSID'
+WIFI_PSK='$WIFI_PSK'
 EOF
